@@ -17,7 +17,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/08/12/machine-learing-学习笔记/index.html">
 <meta property="og:site_name" content="Angel_奏心">
 <meta property="og:description" content="自从开了machine learing的坑以后，很久没有学了，总算暑假有空，开始正式学习orz">
-<meta property="og:updated_time" content="2016-11-24T23:51:37.000Z">
+<meta property="og:updated_time" content="2017-02-10T18:22:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="machine learing 学习笔记">
 <meta name="twitter:description" content="自从开了machine learing的坑以后，很久没有学了，总算暑假有空，开始正式学习orz">
@@ -97,44 +97,40 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Week-1"><span class="toc-number">1.</span> <span class="toc-text">Week 1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#代价函数-J-theta"><span class="toc-number">1.1.</span> <span class="toc-text">代价函数$J(\theta)$</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#梯度下降算法"><span class="toc-number">1.2.</span> <span class="toc-text">梯度下降算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线性代数知识"><span class="toc-number">1.3.</span> <span class="toc-text">线性代数知识</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Week-2"><span class="toc-number">2.</span> <span class="toc-text">Week 2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装Octave-MATLAB"><span class="toc-number">2.1.</span> <span class="toc-text">安装Octave/MATLAB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多种特征量的线性回归"><span class="toc-number">2.2.</span> <span class="toc-text">多种特征量的线性回归</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#正规方程"><span class="toc-number">2.3.</span> <span class="toc-text">正规方程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#对于算法的选择"><span class="toc-number">2.3.1.</span> <span class="toc-text">对于算法的选择</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Octave命令笔记"><span class="toc-number">2.4.</span> <span class="toc-text">Octave命令笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Octave的一些命令"><span class="toc-number">2.4.1.</span> <span class="toc-text">Octave的一些命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#向量化"><span class="toc-number">2.4.2.</span> <span class="toc-text">向量化</span></a></li></ol></li></ol></li></ol>
 		
 		</div>
 		
 		<p>自从开了machine learing的坑以后，很久没有学了，总算暑假有空，开始正式学习orz</p>
 <a id="more"></a>
 <p>在<strong>course</strong>中选择了stanford的机器学习一课<a href="https://www.coursera.org/learn/machine-learning/home/welcome" target="_blank" rel="external">传送门</a>,从基础开始系统的学习ML的知识。该篇作为笔记，记录学到的知识。</p>
-<p>##Week 1<br>主要介绍了ML的分类：<strong>Supervised Learing(监督学习)</strong>和<strong>Unsupervised Learing(无监督学习)</strong><br>区别在于,输入的数据是否有label(标签)，有则为监督学习，无则为无监督学习<br>具体可以看这<a href="http://www.zhihu.com/question/23194489" target="_blank" rel="external">什么是无监督学习？(知乎)</a>。</p>
+<h2 id="Week-1"><a href="#Week-1" class="headerlink" title="Week 1"></a>Week 1</h2><p>主要介绍了ML的分类：<strong>Supervised Learing(监督学习)</strong>和<strong>Unsupervised Learing(无监督学习)</strong><br>区别在于,输入的数据是否有label(标签)，有则为监督学习，无则为无监督学习<br>具体可以看这<a href="http://www.zhihu.com/question/23194489" target="_blank" rel="external">什么是无监督学习？(知乎)</a>。</p>
 <p>线性回归和聚类，分别属于监督学习和无监督学习。比如Google News就使用了聚类算法。</p>
-<p>###代价函数$J(\theta)$<br>在Week 1中，主要讲解的是Linear Regression（线性回归）。并定义了一些术语。<br>在每个线性回归中，我们都有一个训练集，其中：<br>m代表了训练样本的数量，$h_\theta(x^{(i)})$即我们的拟合函数在第i个样本时的结果，$y^{(i)}$即第i组样本的实际结果。<br>接下来，就可以定义J(θ)(cost function)的概念了。<br><blockquote><p>$J(\theta) = \frac 1 {2m} {\sum_{i=1}^m (h_\theta(x^{(i)})-y^{(i)})^2}$</p>
+<h3 id="代价函数-J-theta"><a href="#代价函数-J-theta" class="headerlink" title="代价函数$J(\theta)$"></a>代价函数$J(\theta)$</h3><p>在Week 1中，主要讲解的是Linear Regression（线性回归）。并定义了一些术语。<br>在每个线性回归中，我们都有一个训练集，其中：<br>m代表了训练样本的数量，$h_\theta(x^{(i)})$即我们的拟合函数在第i个样本时的结果，$y^{(i)}$即第i组样本的实际结果。<br>接下来，就可以定义J(θ)(cost function)的概念了。<br><blockquote><p>$J(\theta) = \frac 1 {2m} {\sum_{i=1}^m (h_\theta(x^{(i)})-y^{(i)})^2}$</p>
 </blockquote><br>我们可以通过$J(\theta)$这个函数，直观的反应出现在的拟合函数与训练样本的拟合度。</p>
-<p>###梯度下降算法</p>
-<p>我们可以通过选择合适的算法，让$J(\theta)$达到局部最优，从而让数据更好的拟合。<br>其中的一个方法为Gradient Descent(梯度下降算法)。<br><blockquote><p>${\theta_j := \alpha\frac \partial {\partial\theta_j}J(\theta_0,\theta_1)}$ $for$ ( $j = 0$ $and$ $j = 1$)</p>
+<h3 id="梯度下降算法"><a href="#梯度下降算法" class="headerlink" title="梯度下降算法"></a>梯度下降算法</h3><p>我们可以通过选择合适的算法，让$J(\theta)$达到局部最优，从而让数据更好的拟合。<br>其中的一个方法为Gradient Descent(梯度下降算法)。<br><blockquote><p>${\theta_j := \alpha\frac \partial {\partial\theta_j}J(\theta_0,\theta_1)}$ $for$ ( $j = 0$ $and$ $j = 1$)</p>
 <footer><strong>单一特征变量时</strong><cite>其中$\alpha$为学习效率</cite></footer></blockquote></p>
 <p><strong>记住，要同时更新$\theta_0$和$\theta_1$</strong></p>
-<p>###线性代数知识</p>
-<p>网上有很多，不再做赘述</p>
-<p>##Week 2</p>
-<p>###安装Octave/MATLAB<br>安装Octave/MATLAB，具体注意事项看<a href="http://wiki.octave.org/GNU_Octave_Wiki" target="_blank" rel="external">http://wiki.octave.org/GNU_Octave_Wiki</a><br>与<a href="https://www.coursera.org/learn/machine-learning/supplement/ks2m0/setting-up-your-programming-assignment-environment" target="_blank" rel="external">https://www.coursera.org/learn/machine-learning/supplement/ks2m0/setting-up-your-programming-assignment-environment</a></p>
-<p>###多种特征量的线性回归<br>当有多种特征量时，我们可以用n代表特征的数量，$x^{(i)}$代表第$i$个训练样本集合，$x_j^{(i)}$代表第$j$个特征向量的第$i$个训练数据。<br>因此，$h_\theta(x)$变成了<br><blockquote><p>$h_\theta(x) = \theta_0 + \sum_{i=1}^n(\theta_ix_i)$</p>
+<h3 id="线性代数知识"><a href="#线性代数知识" class="headerlink" title="线性代数知识"></a>线性代数知识</h3><p>网上有很多，不再做赘述</p>
+<h2 id="Week-2"><a href="#Week-2" class="headerlink" title="Week 2"></a>Week 2</h2><h3 id="安装Octave-MATLAB"><a href="#安装Octave-MATLAB" class="headerlink" title="安装Octave/MATLAB"></a>安装Octave/MATLAB</h3><p>安装Octave/MATLAB，具体注意事项看<a href="http://wiki.octave.org/GNU_Octave_Wiki" target="_blank" rel="external">http://wiki.octave.org/GNU_Octave_Wiki</a><br>与<a href="https://www.coursera.org/learn/machine-learning/supplement/ks2m0/setting-up-your-programming-assignment-environment" target="_blank" rel="external">https://www.coursera.org/learn/machine-learning/supplement/ks2m0/setting-up-your-programming-assignment-environment</a></p>
+<h3 id="多种特征量的线性回归"><a href="#多种特征量的线性回归" class="headerlink" title="多种特征量的线性回归"></a>多种特征量的线性回归</h3><p>当有多种特征量时，我们可以用n代表特征的数量，$x^{(i)}$代表第$i$个训练样本集合，$x_j^{(i)}$代表第$j$个特征向量的第$i$个训练数据。<br>因此，$h_\theta(x)$变成了<br><blockquote><p>$h_\theta(x) = \theta_0 + \sum_{i=1}^n(\theta_ix_i)$</p>
 </blockquote><br>同时，我们可以把$x$和$\theta$写成向量的形式，那么$h_\theta(x)$可以表示为<br><blockquote><p>$h_\theta(x) = \theta^Tx$</p>
 <footer><strong>记得$\theta_0$，总共为n+1项</strong></footer></blockquote><br>那么我们就可以把多个特征值的梯度下降写成<br><blockquote><p>$\theta_j := \theta_j - \alpha\frac 1 m {\sum_{i=1}^m (h_\theta(x^{(i)})-y^{(i)})}x_j^{(i)}$</p>
 <footer><strong>update $\theta_j$ for $j=0...n$</strong></footer></blockquote><br>在梯度下降算法中，若特征值的范围之间相差很大，那么就会使下降的过程变得很缓慢<br>因此，我们可以通过 <strong>特征缩放 (feature scaling)</strong> 来加快下降的速度。<br><blockquote><p>$x_i\leftarrow \frac {x_i-\overline{x_i}} {Range(x_i)}$</p>
 <footer><strong>用该值代替$x_i-u_i$ 中的$x_i$</strong></footer></blockquote><br>在梯度下降中，我们可以通过不断的调整学习效率$\alpha$的值，来得出最有效的学习效率，比如倍增等。<br>另外，选择合适的特征向量后，可以使用线性回归拟合非常复杂的函数(详细算法暂时不表)</p>
-<p>###正规方程<br>正规方程(Normal Equation是一种区别于迭代方法的直接解法，可以一次得出最优的$\theta$值，<br><blockquote><p>$\theta = (X^TX)^{-1}X^Ty$<br>Octave：pinv(x’*x)*x’*y (pinv为逆函数)</p>
+<h3 id="正规方程"><a href="#正规方程" class="headerlink" title="正规方程"></a>正规方程</h3><p>正规方程(Normal Equation是一种区别于迭代方法的直接解法，可以一次得出最优的$\theta$值，<br><blockquote><p>$\theta = (X^TX)^{-1}X^Ty$<br>Octave：pinv(x’*x)*x’*y (pinv为逆函数)</p>
 </blockquote><br>X矩阵的每一行即每一组特征向量的转制，<strong>记得常数值1</strong><br>所以一共有n+1列，y即训练样本结果向量（m维）<br>我们比较正规方程和梯度下降两个算法，可以看出，正规方程有如下优点<br><blockquote><p>不需要设置学习效率$\alpha$<br>一步求解，不需要多次迭代</p>
 </blockquote><br>按此来看，正规方程完全优于梯度下降，那么，为何还有梯度下降呢？因为正规方程有一个缺点<br><blockquote><p>矩阵乘法的效率为O($n^3$),当特征值过多时，会导致效率低下</p>
 </blockquote></p>
-<p>####对于算法的选择<br>比较而言，梯度下降算法更稳定，适应性更强<br>所以，一般若特征量个数在10,000以内,考虑使用正规方程,若超过，则使用梯度下降</p>
-<p>###Octave命令笔记</p>
-<p>####Octave的一些命令<br>命令详细内容可以通过help检索(感觉大致和MATLAB差不多)<br><blockquote><p>save load</p>
+<h4 id="对于算法的选择"><a href="#对于算法的选择" class="headerlink" title="对于算法的选择"></a>对于算法的选择</h4><p>比较而言，梯度下降算法更稳定，适应性更强<br>所以，一般若特征量个数在10,000以内,考虑使用正规方程,若超过，则使用梯度下降</p>
+<h3 id="Octave命令笔记"><a href="#Octave命令笔记" class="headerlink" title="Octave命令笔记"></a>Octave命令笔记</h3><h4 id="Octave的一些命令"><a href="#Octave的一些命令" class="headerlink" title="Octave的一些命令"></a>Octave的一些命令</h4><p>命令详细内容可以通过help检索(感觉大致和MATLAB差不多)<br><blockquote><p>save load</p>
 <footer><strong>文件保存和加载</strong></footer></blockquote></p>
 <blockquote><p>ones zeros eye(单位矩阵) magic(行列与斜对角和相同) randn(符合正态分布)</p>
 <footer><strong>矩阵的操作</strong></footer></blockquote>
 <blockquote><p>plot()(绘制二维函数) plot3(绘制三维函数) hold on(plot直接绘制在上次图中)<br>       xlabel(备注行) ylabel(备注列)<br>       legend(在右上角标注函数名称与线条颜色) title(标注表名) figure(为绘制图表标号)<br>       close(关闭图表) subplot(分割grid,显示不同图像)<br>       axis(设置坐标范围和间距) clf(清除) imagesc(绘制图像并且用不同颜色表示不同的数字)<br>       imagesc(),colorbar.colormap gary(生成灰度图)</p>
 <footer><strong>图形绘制</strong></footer></blockquote>
 <p>记得熟练运用 <strong>,</strong> 操作符；<br>另外<br>函数的调用由于和MATLAB几乎一样，直接跳过</p>
-<p>####向量化<br>这节讲到了一个简化码量的trick: 由于各个语言中，一般都有内置的线性函数库，所以在实现一些公式<br>比如$\sum_{i=1}^m {\theta_iX_i}$时，我们可以通过向量化大大简化实现所需代码量<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">double</span> prediction</div><div class="line"> = theta.transpose() * x</div></pre></td></tr></table></figure></p>
+<h4 id="向量化"><a href="#向量化" class="headerlink" title="向量化"></a>向量化</h4><p>这节讲到了一个简化码量的trick: 由于各个语言中，一般都有内置的线性函数库，所以在实现一些公式<br>比如$\sum_{i=1}^m {\theta_iX_i}$时，我们可以通过向量化大大简化实现所需代码量<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">double</span> prediction</div><div class="line"> = theta.transpose() * x</div></pre></td></tr></table></figure></p>
 <p>其中，theta和x为各自数据集的向量<br>同理，我们也可以用这种方法，来简洁的实现对$\theta$的更新</p>
   
 	</div>
@@ -198,7 +194,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Week-1"><span class="toc-number">1.</span> <span class="toc-text">Week 1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#代价函数-J-theta"><span class="toc-number">1.1.</span> <span class="toc-text">代价函数$J(\theta)$</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#梯度下降算法"><span class="toc-number">1.2.</span> <span class="toc-text">梯度下降算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线性代数知识"><span class="toc-number">1.3.</span> <span class="toc-text">线性代数知识</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Week-2"><span class="toc-number">2.</span> <span class="toc-text">Week 2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装Octave-MATLAB"><span class="toc-number">2.1.</span> <span class="toc-text">安装Octave/MATLAB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多种特征量的线性回归"><span class="toc-number">2.2.</span> <span class="toc-text">多种特征量的线性回归</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#正规方程"><span class="toc-number">2.3.</span> <span class="toc-text">正规方程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#对于算法的选择"><span class="toc-number">2.3.1.</span> <span class="toc-text">对于算法的选择</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Octave命令笔记"><span class="toc-number">2.4.</span> <span class="toc-text">Octave命令笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Octave的一些命令"><span class="toc-number">2.4.1.</span> <span class="toc-text">Octave的一些命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#向量化"><span class="toc-number">2.4.2.</span> <span class="toc-text">向量化</span></a></li></ol></li></ol></li></ol>
  
   </div>
 

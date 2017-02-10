@@ -17,7 +17,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/02/19/codeforce652B/index.html">
 <meta property="og:site_name" content="Angel_奏心">
 <meta property="og:description" content="寒假颓废了好久，准备回归正轨，奈何算法早已生疏，于是随便拿到水题来练练手orz。">
-<meta property="og:updated_time" content="2016-11-24T23:51:37.000Z">
+<meta property="og:updated_time" content="2017-02-10T18:20:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="codeforce652B">
 <meta name="twitter:description" content="寒假颓废了好久，准备回归正轨，奈何算法早已生疏，于是随便拿到水题来练练手orz。">
@@ -97,17 +97,15 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#题意"><span class="toc-number">1.</span> <span class="toc-text">题意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#思路"><span class="toc-number">2.</span> <span class="toc-text">思路</span></a></li></ol>
 		
 		</div>
 		
 		<p>寒假颓废了好久，准备回归正轨，奈何算法早已生疏，于是随便拿到水题来练练手orz。</p>
 <a id="more"></a>
 <p>题目<a href="http://codeforces.com/problemset/problem/625/B" target="_blank" rel="external">戳这里</a></p>
-<p>##题意</p>
-<p>题目大意是让你求B串在A串中的出现次数，毫不犹豫的想到了<strong>KMP</strong></p>
-<p>##思路</p>
-<p>众所周知，KMP是解决字符串匹配的一个优秀算法，如果还未了解，可以参考这篇博客<strong><a href="http://blog.csdn.net/v_july_v/article/details/7041827" target="_blank" rel="external">从头到尾彻底理解KMP</a></strong>。</p>
+<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>题目大意是让你求B串在A串中的出现次数，毫不犹豫的想到了<strong>KMP</strong></p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>众所周知，KMP是解决字符串匹配的一个优秀算法，如果还未了解，可以参考这篇博客<strong><a href="http://blog.csdn.net/v_july_v/article/details/7041827" target="_blank" rel="external">从头到尾彻底理解KMP</a></strong>。</p>
 <p>在该算法中，返回的是第一次匹配到的B串在A串中的首地址。如果要求一共出现了几次，很容易想到，将匹配时的比较稍作更改，增加一个变量记录次数即可。</p>
 <p>##解题</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> Next[<span class="number">35</span>];</div><div class="line"><span class="keyword">char</span> s[<span class="number">100000</span>], p[<span class="number">35</span>];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">GetNext</span><span class="params">()</span>  </span></div><div class="line">&#123;  </div><div class="line">    <span class="keyword">int</span> pLen = <span class="built_in">strlen</span>(p);  </div><div class="line">    Next[<span class="number">0</span>] = <span class="number">-1</span>;  </div><div class="line">    <span class="keyword">int</span> k = <span class="number">-1</span>;  </div><div class="line">    <span class="keyword">int</span> j = <span class="number">0</span>;  </div><div class="line">    <span class="keyword">while</span> (j &lt; pLen - <span class="number">1</span>)  </div><div class="line">    &#123;  </div><div class="line">        <span class="keyword">if</span> (k == <span class="number">-1</span> || p[j] == p[k]) ++k, ++j, Next[j] = k;  </div><div class="line">        <span class="keyword">else</span> k = Next[k];      </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">KmpSearch</span><span class="params">()</span> </span>&#123;  </div><div class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;  </div><div class="line">    <span class="keyword">int</span> j = <span class="number">0</span>;  </div><div class="line">    <span class="keyword">int</span> sLen = <span class="built_in">strlen</span>(s);  </div><div class="line">    <span class="keyword">int</span> pLen = <span class="built_in">strlen</span>(p);</div><div class="line">	<span class="keyword">int</span> cnt = <span class="number">0</span>;  </div><div class="line">    <span class="keyword">while</span> (i &lt; sLen)  </div><div class="line">    &#123;  </div><div class="line">        <span class="keyword">if</span> (j == <span class="number">-1</span> || s[i] == p[j]) i++, j++;      </div><div class="line">        <span class="keyword">else</span> j = Next[j];    </div><div class="line">        <span class="keyword">if</span>(j == pLen) ++cnt,j=<span class="number">0</span>;</div><div class="line">    &#125;  </div><div class="line"> 	<span class="keyword">return</span> cnt;</div><div class="line">&#125;  </div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="built_in">scanf</span>(<span class="string">"%s%s"</span>, s, p);</div><div class="line">	GetNext();</div><div class="line">  	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,KmpSearch());</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -174,7 +172,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#题意"><span class="toc-number">1.</span> <span class="toc-text">题意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#思路"><span class="toc-number">2.</span> <span class="toc-text">思路</span></a></li></ol>
  
   </div>
 
