@@ -1,0 +1,597 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>machine learing 学习笔记 | Angel_奏心</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Angel_奏心">
+    
+
+    
+    <meta name="description" content="自从开了machine learing的坑以后，很久没有学了，总算暑假有空，开始正式学习orz">
+<meta property="og:type" content="article">
+<meta property="og:title" content="machine learing 学习笔记">
+<meta property="og:url" content="http://yoursite.com/2016/08/12/machine-learing-学习笔记/index.html">
+<meta property="og:site_name" content="Angel_奏心">
+<meta property="og:description" content="自从开了machine learing的坑以后，很久没有学了，总算暑假有空，开始正式学习orz">
+<meta property="og:updated_time" content="2016-11-24T23:51:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="machine learing 学习笔记">
+<meta name="twitter:description" content="自从开了machine learing的坑以后，很久没有学了，总算暑假有空，开始正式学习orz">
+<link rel="publisher" href="114866791066999909157">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Angel_奏心" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Angel_奏心" title="Angel_奏心"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Angel_奏心">Angel_奏心</a></h1>
+				<h2 class="blog-motto">立于浮华之世，奏天籁之音</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/08/12/machine-learing-学习笔记/" title="machine learing 学习笔记" itemprop="url">machine learing 学习笔记</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/114866791066999909157?rel=author" title="Angel_奏心" target="_blank" itemprop="author">Angel_奏心</a>
+		
+  <p class="article-time">
+    <time datetime="2016-08-12T12:21:30.000Z" itemprop="datePublished"> 发表于 2016-08-12</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			
+		
+		</div>
+		
+		<p>自从开了machine learing的坑以后，很久没有学了，总算暑假有空，开始正式学习orz</p>
+<a id="more"></a>
+<p>在<strong>course</strong>中选择了stanford的机器学习一课<a href="https://www.coursera.org/learn/machine-learning/home/welcome" target="_blank" rel="external">传送门</a>,从基础开始系统的学习ML的知识。该篇作为笔记，记录学到的知识。</p>
+<p>##Week 1<br>主要介绍了ML的分类：<strong>Supervised Learing(监督学习)</strong>和<strong>Unsupervised Learing(无监督学习)</strong><br>区别在于,输入的数据是否有label(标签)，有则为监督学习，无则为无监督学习<br>具体可以看这<a href="http://www.zhihu.com/question/23194489" target="_blank" rel="external">什么是无监督学习？(知乎)</a>。</p>
+<p>线性回归和聚类，分别属于监督学习和无监督学习。比如Google News就使用了聚类算法。</p>
+<p>###代价函数$J(\theta)$<br>在Week 1中，主要讲解的是Linear Regression（线性回归）。并定义了一些术语。<br>在每个线性回归中，我们都有一个训练集，其中：<br>m代表了训练样本的数量，$h_\theta(x^{(i)})$即我们的拟合函数在第i个样本时的结果，$y^{(i)}$即第i组样本的实际结果。<br>接下来，就可以定义J(θ)(cost function)的概念了。<br><blockquote><p>$J(\theta) = \frac 1 {2m} {\sum_{i=1}^m (h_\theta(x^{(i)})-y^{(i)})^2}$</p>
+</blockquote><br>我们可以通过$J(\theta)$这个函数，直观的反应出现在的拟合函数与训练样本的拟合度。</p>
+<p>###梯度下降算法</p>
+<p>我们可以通过选择合适的算法，让$J(\theta)$达到局部最优，从而让数据更好的拟合。<br>其中的一个方法为Gradient Descent(梯度下降算法)。<br><blockquote><p>${\theta_j := \alpha\frac \partial {\partial\theta_j}J(\theta_0,\theta_1)}$ $for$ ( $j = 0$ $and$ $j = 1$)</p>
+<footer><strong>单一特征变量时</strong><cite>其中$\alpha$为学习效率</cite></footer></blockquote></p>
+<p><strong>记住，要同时更新$\theta_0$和$\theta_1$</strong></p>
+<p>###线性代数知识</p>
+<p>网上有很多，不再做赘述</p>
+<p>##Week 2</p>
+<p>###安装Octave/MATLAB<br>安装Octave/MATLAB，具体注意事项看<a href="http://wiki.octave.org/GNU_Octave_Wiki" target="_blank" rel="external">http://wiki.octave.org/GNU_Octave_Wiki</a><br>与<a href="https://www.coursera.org/learn/machine-learning/supplement/ks2m0/setting-up-your-programming-assignment-environment" target="_blank" rel="external">https://www.coursera.org/learn/machine-learning/supplement/ks2m0/setting-up-your-programming-assignment-environment</a></p>
+<p>###多种特征量的线性回归<br>当有多种特征量时，我们可以用n代表特征的数量，$x^{(i)}$代表第$i$个训练样本集合，$x_j^{(i)}$代表第$j$个特征向量的第$i$个训练数据。<br>因此，$h_\theta(x)$变成了<br><blockquote><p>$h_\theta(x) = \theta_0 + \sum_{i=1}^n(\theta_ix_i)$</p>
+</blockquote><br>同时，我们可以把$x$和$\theta$写成向量的形式，那么$h_\theta(x)$可以表示为<br><blockquote><p>$h_\theta(x) = \theta^Tx$</p>
+<footer><strong>记得$\theta_0$，总共为n+1项</strong></footer></blockquote><br>那么我们就可以把多个特征值的梯度下降写成<br><blockquote><p>$\theta_j := \theta_j - \alpha\frac 1 m {\sum_{i=1}^m (h_\theta(x^{(i)})-y^{(i)})}x_j^{(i)}$</p>
+<footer><strong>update $\theta_j$ for $j=0...n$</strong></footer></blockquote><br>在梯度下降算法中，若特征值的范围之间相差很大，那么就会使下降的过程变得很缓慢<br>因此，我们可以通过 <strong>特征缩放 (feature scaling)</strong> 来加快下降的速度。<br><blockquote><p>$x_i\leftarrow \frac {x_i-\overline{x_i}} {Range(x_i)}$</p>
+<footer><strong>用该值代替$x_i-u_i$ 中的$x_i$</strong></footer></blockquote><br>在梯度下降中，我们可以通过不断的调整学习效率$\alpha$的值，来得出最有效的学习效率，比如倍增等。<br>另外，选择合适的特征向量后，可以使用线性回归拟合非常复杂的函数(详细算法暂时不表)</p>
+<p>###正规方程<br>正规方程(Normal Equation是一种区别于迭代方法的直接解法，可以一次得出最优的$\theta$值，<br><blockquote><p>$\theta = (X^TX)^{-1}X^Ty$<br>Octave：pinv(x’*x)*x’*y (pinv为逆函数)</p>
+</blockquote><br>X矩阵的每一行即每一组特征向量的转制，<strong>记得常数值1</strong><br>所以一共有n+1列，y即训练样本结果向量（m维）<br>我们比较正规方程和梯度下降两个算法，可以看出，正规方程有如下优点<br><blockquote><p>不需要设置学习效率$\alpha$<br>一步求解，不需要多次迭代</p>
+</blockquote><br>按此来看，正规方程完全优于梯度下降，那么，为何还有梯度下降呢？因为正规方程有一个缺点<br><blockquote><p>矩阵乘法的效率为O($n^3$),当特征值过多时，会导致效率低下</p>
+</blockquote></p>
+<p>####对于算法的选择<br>比较而言，梯度下降算法更稳定，适应性更强<br>所以，一般若特征量个数在10,000以内,考虑使用正规方程,若超过，则使用梯度下降</p>
+<p>###Octave命令笔记</p>
+<p>####Octave的一些命令<br>命令详细内容可以通过help检索(感觉大致和MATLAB差不多)<br><blockquote><p>save load</p>
+<footer><strong>文件保存和加载</strong></footer></blockquote></p>
+<blockquote><p>ones zeros eye(单位矩阵) magic(行列与斜对角和相同) randn(符合正态分布)</p>
+<footer><strong>矩阵的操作</strong></footer></blockquote>
+<blockquote><p>plot()(绘制二维函数) plot3(绘制三维函数) hold on(plot直接绘制在上次图中)<br>       xlabel(备注行) ylabel(备注列)<br>       legend(在右上角标注函数名称与线条颜色) title(标注表名) figure(为绘制图表标号)<br>       close(关闭图表) subplot(分割grid,显示不同图像)<br>       axis(设置坐标范围和间距) clf(清除) imagesc(绘制图像并且用不同颜色表示不同的数字)<br>       imagesc(),colorbar.colormap gary(生成灰度图)</p>
+<footer><strong>图形绘制</strong></footer></blockquote>
+<p>记得熟练运用 <strong>,</strong> 操作符；<br>另外<br>函数的调用由于和MATLAB几乎一样，直接跳过</p>
+<p>####向量化<br>这节讲到了一个简化码量的trick: 由于各个语言中，一般都有内置的线性函数库，所以在实现一些公式<br>比如$\sum_{i=1}^m {\theta_iX_i}$时，我们可以通过向量化大大简化实现所需代码量<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">double</span> prediction</div><div class="line"> = theta.transpose() * x</div></pre></td></tr></table></figure></p>
+<p>其中，theta和x为各自数据集的向量<br>同理，我们也可以用这种方法，来简洁的实现对$\theta$的更新</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/machine-learing/">machine learing</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/笔记/">笔记</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2016/08/12/machine-learing-学习笔记/" data-title="machine learing 学习笔记 | Angel_奏心" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/10/21/python训练/" title="python训练">
+  <strong>上一篇：</strong><br/>
+  <span>
+  python训练</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/02/19/codeforce652B/"  title="codeforce652B">
+ <strong>下一篇：</strong><br/> 
+ <span>codeforce652B
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ 
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github 名片</p>
+<div class="github-card" data-github="angelzouxin" data-width="220" data-height="119" data-theme="medium">
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
+</div>
+  </div>
+
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/ACM-ICPC/" title="ACM/ICPC">ACM/ICPC<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/" title="Java">Java<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/arduino/" title="arduino">arduino<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/machine-learing/" title="machine learing">machine learing<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/琐记/" title="琐记">琐记<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/arduino/" title="arduino">arduino<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/日常/" title="日常">日常<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/字符串匹配/" title="字符串匹配">字符串匹配<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java-IO/" title="Java IO">Java IO<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/笔记/" title="笔记">笔记<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/KMP/" title="KMP">KMP<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/simple-training/" title="simple training">simple training<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/八数码/" title="八数码">八数码<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/A-搜索/" title="A*搜索">A*搜索<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/康拓展开/" title="康拓展开">康拓展开<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/python/" title="python">python<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://idlepilot.com/" target="_blank" title="飞行员手册">飞行员手册</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://chouun.github.io/" target="_blank" title="Fate/Unlimted Darkness">Fate/Unlimted Darkness</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=null&verifier=&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Angel_zouxin <br/>
+			——立于浮华之世，奏天籁之音</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/angelzouxin" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		<a href="http://www.zhihu.com/people/angelzoxuin" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		<a href="https://plus.google.com/114866791066999909157?rel=author" target="_blank" class="icon-google_plus" title="Google+"></a>
+		
+		
+		<a href="mailto:angelzouxin@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="Angel_奏心">Angel_奏心</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

@@ -1,0 +1,576 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>python训练 | Angel_奏心</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Angel_奏心">
+    
+
+    
+    <meta name="description" content="#引言这两年零零碎碎学了下python，除了造轮子爬1024就没干过别的事情orz，现在找些训练做做，训练参照Python 练习册，每天一个小程序
+#0000题将你的 QQ 头像（或者微博头像）右上角加上红色的数字，类似于微信未读信息数量那种提示效果。 类似于">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python训练">
+<meta property="og:url" content="http://yoursite.com/2016/10/21/python训练/index.html">
+<meta property="og:site_name" content="Angel_奏心">
+<meta property="og:description" content="#引言这两年零零碎碎学了下python，除了造轮子爬1024就没干过别的事情orz，现在找些训练做做，训练参照Python 练习册，每天一个小程序
+#0000题将你的 QQ 头像（或者微博头像）右上角加上红色的数字，类似于微信未读信息数量那种提示效果。 类似于">
+<meta property="og:image" content="http://yoursite.com/img/python_training/in.jpg">
+<meta property="og:image" content="http://yoursite.com/img/python_training/out.jpg">
+<meta property="og:image" content="http://yoursite.com/img/python_training/out2.jpg">
+<meta property="og:image" content="http://yoursite.com/img/python_training/verification.jpeg">
+<meta property="og:updated_time" content="2016-11-24T23:51:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python训练">
+<meta name="twitter:description" content="#引言这两年零零碎碎学了下python，除了造轮子爬1024就没干过别的事情orz，现在找些训练做做，训练参照Python 练习册，每天一个小程序
+#0000题将你的 QQ 头像（或者微博头像）右上角加上红色的数字，类似于微信未读信息数量那种提示效果。 类似于">
+<meta name="twitter:image" content="http://yoursite.com/img/python_training/in.jpg">
+<link rel="publisher" href="114866791066999909157">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Angel_奏心" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Angel_奏心" title="Angel_奏心"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Angel_奏心">Angel_奏心</a></h1>
+				<h2 class="blog-motto">立于浮华之世，奏天籁之音</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/10/21/python训练/" title="python训练" itemprop="url">python训练</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/114866791066999909157?rel=author" title="Angel_奏心" target="_blank" itemprop="author">Angel_奏心</a>
+		
+  <p class="article-time">
+    <time datetime="2016-10-21T09:10:59.000Z" itemprop="datePublished"> 发表于 2016-10-21</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			
+		
+		</div>
+		
+		<p>#引言<br>这两年零零碎碎学了下python，除了造轮子爬1024就没干过别的事情orz，现在找些训练做做，训练参照<a href="https://github.com/Yixiaohan/show-me-the-code" target="_blank" rel="external">Python 练习册，每天一个小程序</a></p>
+<p>#0000题<br>将你的 QQ 头像（或者微博头像）右上角加上红色的数字，类似于微信未读信息数量那种提示效果。 类似于<a id="more"></a>图中效果<a href="/img/python_training/Sample0000.png"></a><br>要在一张图中绘图，可以使用python的图像处理库<em>PIL：Python Imaging Library</em>,由于PIL仅支持到Python 2.7，加上年久失修，于是<br>一群志愿者在PIL的基础上创建了兼容的版本，名字叫<a href="https://github.com/python-pillow/Pillow" target="_blank" rel="external">Pillow</a>，支持最新Python 3.x。</p>
+<p>绘图可以使用其中的<code>ImageDraw</code>来实现，以下是实现<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"></div><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image, ImageDraw, ImageFont</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_img</span><span class="params">(img)</span>:</span></div><div class="line">    draw = ImageDraw.Draw(img)</div><div class="line">    myfont = ImageFont.truetype(<span class="string">'C:/windows/fonts/Arial.ttf'</span>, size=<span class="number">20</span>) <span class="comment">#设置绘制的style和size</span></div><div class="line">    fillcolor = <span class="string">"#ff0000"</span> <span class="comment">#设置填充颜色</span></div><div class="line">    width, height = img.size <span class="comment">#为图片右边与底部</span></div><div class="line">    draw.text((width<span class="number">-200</span>, <span class="number">0</span>), <span class="string">'100'</span>, font=myfont, fill = fillcolor)</div><div class="line">    img.save(<span class="string">'out.jpg'</span>,<span class="string">'jpeg'</span>)  <span class="comment">#保存新图片</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    image = Image.open(<span class="string">'in.jpg'</span>) <span class="comment">#你要编辑的图片</span></div><div class="line">    add_img(image)</div></pre></td></tr></table></figure></p>
+<p><img src="/img/python_training/in.jpg" alt="原图"><br><img src="/img/python_training/out.jpg" alt="处理后"><br>然后脑洞了一下，把数字换成中文，结果无法显示，想了想，会不会是因为字体不支持，换了一下字体后，bingo！</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"></div><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image, ImageDraw, ImageFont</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_img</span><span class="params">(img)</span>:</span></div><div class="line">    draw = ImageDraw.Draw(img)</div><div class="line">    myfont = ImageFont.truetype(<span class="string">'C:/windows/fonts/simsun.ttc'</span>, size=<span class="number">150</span>) <span class="comment">#选择正确字体</span></div><div class="line">    fillcolor = <span class="string">"#ff0000"</span></div><div class="line">    width, height = img.size</div><div class="line">    draw.text((width<span class="number">-1000</span>, <span class="number">150</span>), <span class="string">'抱头蹲防QAQ'</span>, font=myfont, fill = fillcolor)</div><div class="line">    img.save(<span class="string">'out2.jpg'</span>,<span class="string">'jpeg'</span>)</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    image = Image.open(<span class="string">'in2.jpg'</span>)</div><div class="line">    add_img(image)</div></pre></td></tr></table></figure>
+<p><img src="/img/python_training/out2.jpg" alt="输出"></p>
+<p>#0001题<br>做为 Apple Store App 独立开发者，你要搞限时促销，为你的应用生成激活码（或者优惠券），使用 Python 如何生成 200 个激活码（或者优惠券）？</p>
+<p>生成激活码，就是把需要的字符放到一个list里，然后每次random取出其中一个，另外考虑到激活码的可读性，可以把容易混淆的字符去掉（如’I’,’l’,’1’,’O’,’0’）<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> random</div><div class="line"></div><div class="line">lower_case = <span class="string">"abcdefghjkmnopqrstuvwxyz"</span></div><div class="line">upper_case = lower_case.upper()</div><div class="line">num_case = <span class="string">''</span>.join(map(str,range(<span class="number">2</span>,<span class="number">11</span>)))</div><div class="line">init_case = <span class="string">''</span>.join((lower_case,upper_case,num_case))</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    f = open(<span class="string">'Activition_code.txt'</span>,<span class="string">'a'</span>)</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">200</span>):</div><div class="line">        s = random.sample(init_case,<span class="number">6</span>)</div><div class="line">        f.write(<span class="string">''</span>.join(s) + <span class="string">'\n'</span>)</div><div class="line">    f.close()</div></pre></td></tr></table></figure></p>
+<p>激活码生成了，接下来我们可以结合<code>PIL</code>的<code>draw</code>来试着生成随机验证码,借鉴了<a href="http://qinxuye.me/" target="_blank" rel="external">残阳似血（@秦续业)</a>的<a href="http://qinxuye.me/article/create-validate-code-image-with-pil/" target="_blank" rel="external">轮子</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> random</div><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image, ImageDraw, ImageFont, ImageFilter</div><div class="line"></div><div class="line">lower_case = <span class="string">"abcdefghjkmnopqrstuvwxyz"</span></div><div class="line">upper_case = lower_case.upper()</div><div class="line">num_case = <span class="string">''</span>.join(map(str,range(<span class="number">2</span>,<span class="number">11</span>)))</div><div class="line">init_case = <span class="string">''</span>.join((lower_case,upper_case,num_case))</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_verification_code</span><span class="params">(size=<span class="params">(<span class="number">100</span>,<span class="number">20</span>)</span>,</span></span></div><div class="line">                            case = init_case,</div><div class="line">                            length = <span class="number">4</span>,</div><div class="line">                            img_type = <span class="string">"JPEG"</span>,</div><div class="line">                            mode = <span class="string">"RGB"</span>,</div><div class="line">                            bg_color = <span class="params">(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>)</span>,</div><div class="line">                            fg_color=<span class="params">(<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>)</span>,</div><div class="line">                            font_size=<span class="number">16</span>,</div><div class="line">                            font_type=<span class="string">"C:/windows/fonts/Arial.ttf"</span>):</div><div class="line">                            <span class="comment">#图片格式</span></div><div class="line">                            <span class="comment">#字符集</span></div><div class="line">                            <span class="comment">#验证码长度</span></div><div class="line">                            <span class="comment">#默认保存格式</span></div><div class="line">                            <span class="comment">#图片模式</span></div><div class="line">                            <span class="comment">#背景默认白色</span></div><div class="line">                            <span class="comment">#验证码颜色</span></div><div class="line">                            <span class="comment">#验证码字体大小</span></div><div class="line">                            <span class="comment">#字体</span></div><div class="line">    width, height = size</div><div class="line">    img = Image.new(mode, size, bg_color)</div><div class="line">    draw = ImageDraw.Draw(img)</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_num</span><span class="params">()</span>:</span>          <span class="comment">#生成验证码字符</span></div><div class="line">        <span class="keyword">return</span> random.sample(case,length)</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">create_ver_char</span><span class="params">()</span>:</span></div><div class="line">        num_chars = get_num()</div><div class="line">        ver_chars = <span class="string">' %s '</span> % <span class="string">' '</span>.join(num_chars)</div><div class="line"></div><div class="line">        font = ImageFont.truetype(font_type, font_size)</div><div class="line">        font_width, font_height = font.getsize(ver_chars)</div><div class="line"></div><div class="line">        draw.text(((width - font_width) / <span class="number">3</span>, (height - font_height) / <span class="number">3</span>),</div><div class="line">                    ver_chars, font=font, fill=fg_color)</div><div class="line">        <span class="keyword">return</span> <span class="string">''</span>.join(num_chars)</div><div class="line"></div><div class="line">    strs = create_ver_char()</div><div class="line">   <span class="comment"># 图形扭曲参数</span></div><div class="line">    params = [<span class="number">1</span> - float(random.randint(<span class="number">1</span>, <span class="number">2</span>)) / <span class="number">100</span>,</div><div class="line">              <span class="number">0</span>,</div><div class="line">              <span class="number">0</span>,</div><div class="line">              <span class="number">0</span>,</div><div class="line">              <span class="number">1</span> - float(random.randint(<span class="number">1</span>, <span class="number">10</span>)) / <span class="number">100</span>,</div><div class="line">              float(random.randint(<span class="number">1</span>, <span class="number">2</span>)) / <span class="number">500</span>,</div><div class="line">              <span class="number">0.001</span>,</div><div class="line">              float(random.randint(<span class="number">1</span>, <span class="number">2</span>)) / <span class="number">500</span></div><div class="line">              ]</div><div class="line">    img = img.transform(size, Image.PERSPECTIVE, params) <span class="comment"># 创建扭曲</span></div><div class="line"></div><div class="line">    img = img.filter(ImageFilter.EDGE_ENHANCE_MORE) <span class="comment"># 滤镜，边界加强（阈值更大）</span></div><div class="line"></div><div class="line">    <span class="keyword">return</span> img,strs</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    code_img = create_verification_code()</div><div class="line">    code_img[<span class="number">0</span>].save(<span class="string">"verification.jpeg"</span>, <span class="string">"JPEG"</span>)</div></pre></td></tr></table></figure>
+<p>生成验证码如下<br><img src="/img/python_training/verification.jpeg" alt=""></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/python/">python</a><a href="/tags/simple-training/">simple training</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2016/10/21/python训练/" data-title="python训练 | Angel_奏心" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/02/11/java-System-out/" title="关于java输出的一道题">
+  <strong>上一篇：</strong><br/>
+  <span>
+  关于java输出的一道题</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/08/12/machine-learing-学习笔记/"  title="machine learing 学习笔记">
+ <strong>下一篇：</strong><br/> 
+ <span>machine learing 学习笔记
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ 
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github 名片</p>
+<div class="github-card" data-github="angelzouxin" data-width="220" data-height="119" data-theme="medium">
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
+</div>
+  </div>
+
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/ACM-ICPC/" title="ACM/ICPC">ACM/ICPC<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/" title="Java">Java<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/arduino/" title="arduino">arduino<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/machine-learing/" title="machine learing">machine learing<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/琐记/" title="琐记">琐记<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/arduino/" title="arduino">arduino<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/日常/" title="日常">日常<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/字符串匹配/" title="字符串匹配">字符串匹配<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java-IO/" title="Java IO">Java IO<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/笔记/" title="笔记">笔记<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/KMP/" title="KMP">KMP<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/simple-training/" title="simple training">simple training<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/八数码/" title="八数码">八数码<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/A-搜索/" title="A*搜索">A*搜索<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/康拓展开/" title="康拓展开">康拓展开<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/python/" title="python">python<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://idlepilot.com/" target="_blank" title="飞行员手册">飞行员手册</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://chouun.github.io/" target="_blank" title="Fate/Unlimted Darkness">Fate/Unlimted Darkness</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=null&verifier=&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Angel_zouxin <br/>
+			——立于浮华之世，奏天籁之音</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/angelzouxin" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		<a href="http://www.zhihu.com/people/angelzoxuin" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		<a href="https://plus.google.com/114866791066999909157?rel=author" target="_blank" class="icon-google_plus" title="Google+"></a>
+		
+		
+		<a href="mailto:angelzouxin@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="Angel_奏心">Angel_奏心</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

@@ -1,0 +1,591 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>八数码 | Angel_奏心</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Angel_奏心">
+    
+
+    
+    <meta name="description" content="最近在hdu的oj上刷题，碰到了八数码这道有意思的题目，由于普通的BFS效率极低，并不能很好的解决该题，所以，去网上查了资料，初步接触了A*算法这种搜索方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="八数码">
+<meta property="og:url" content="http://yoursite.com/2015/07/27/八数码/index.html">
+<meta property="og:site_name" content="Angel_奏心">
+<meta property="og:description" content="最近在hdu的oj上刷题，碰到了八数码这道有意思的题目，由于普通的BFS效率极低，并不能很好的解决该题，所以，去网上查了资料，初步接触了A*算法这种搜索方法。">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/5/5d/Astar_progress_animation.gif">
+<meta property="og:updated_time" content="2016-11-24T23:51:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="八数码">
+<meta name="twitter:description" content="最近在hdu的oj上刷题，碰到了八数码这道有意思的题目，由于普通的BFS效率极低，并不能很好的解决该题，所以，去网上查了资料，初步接触了A*算法这种搜索方法。">
+<meta name="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/5/5d/Astar_progress_animation.gif">
+<link rel="publisher" href="114866791066999909157">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Angel_奏心" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Angel_奏心" title="Angel_奏心"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Angel_奏心">Angel_奏心</a></h1>
+				<h2 class="blog-motto">立于浮华之世，奏天籁之音</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/07/27/八数码/" title="八数码" itemprop="url">八数码</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/114866791066999909157?rel=author" title="Angel_奏心" target="_blank" itemprop="author">Angel_奏心</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-27T05:53:15.000Z" itemprop="datePublished"> 发表于 2015-07-27</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			
+		
+		</div>
+		
+		<p>最近在hdu的oj上刷题，碰到了<a href="http://acm.hdu.edu.cn/showproblem.php?pid=1043" target="_blank" rel="external">八数码</a>这道有意思的题目，由于普通的BFS效率极低，并不能很好的解决该题，所以，去网上查了资料，初步接触了<a href="https://en.wikipedia.org/wiki/A*_search_algorithm" target="_blank" rel="external"><strong>A*算法</strong></a>这种搜索方法。</p>
+<a id="more"></a>
+<p>##A*简介</p>
+<p>###何为A*算法</p>
+<p><strong>A*</strong>是人工智能中一种典型的<a href="http://baike.baidu.com/link?url=TPnkxGOObvj6vDOw4lOjYbsJ0YZ5Q_pKSpDDVKZ3W0L-13CcmEfY1ZXJVgCzjyXhj2Ph5-fuhZbV6j-cxi3SNa" target="_blank" rel="external">启发式搜索算法</a>,相较于普通的BFS一层层的向外展开，<strong>启发式搜索</strong>通过对每个搜索位置进行评估，选择当下最优位置，再从这个位置 进行搜索直到目标从而省略了大量的无谓的搜索，提高了效率。 </p>
+<p align="right"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Astar_progress_animation.gif" alt=""></p>
+
+<p>A*搜索查找路径是从起始节点到目标节点的机器人运动规划问题。空圆表示在打开的集合中的节点，也就是说，那些仍然需要探讨，颜色填充在闭集。每个闭合节点上的颜色表示，离开始点的距离：越绿表示越远。可以看到，首先A*在目标方向的一条直线中移动，然后撞击障碍物时，它从开集的节点探讨替代路线</p>
+<p align="right">——摘自WiKi</p>
+
+<p>###启发式搜索简介</p>
+<p>在启发式搜索中，对位置的估价是 十分重要的。采用了不同的估价可以有不同的效果。 </p>
+<p>启发中的估价是用估价函数表示的，如： </p>
+<blockquote>
+<p><strong>$f(n)=g(n)+h(n)$</strong></p>
+</blockquote>
+<p>这里，<strong>$f(n)$</strong>是节点<strong>n</strong>估价函数,<strong>$g(n)$</strong>是在状态空间中从初始点到<strong>n</strong>节点的实际代价，<strong>$h(n)$</strong>是从<strong>n</strong>到目标节点最佳路径的估计代价。在这里，主要是<strong>$h(n)$</strong>体现了搜索的启发信息，因为<strong>$g(n)$</strong>是已知的。如果说详细点，<strong>$g(n)$</strong>代表了搜索的广度优先趋势。但是当<strong>$h(n)&gt;&gt;g(n)$</strong>时，可以忽略<strong>$g(n)$</strong>,而提高效率。</p>
+<p>##八数码</p>
+<p>###何为八数码</p>
+<p>八数码问题也称为九宫问题。在3×3的棋盘，摆有八个棋子，每个棋子上标有1至8的某一数字，不同棋子上标的数字不相同。棋盘上还有一个空格，与空格相邻的棋子可以移到空格中。要求解决的问题是：给出一个初始状态和一个目标状态，找出一种从初始转变成目标状态的移动棋子步数最少的移动步骤。</p>
+<p>###判断是否有解</p>
+<p>八数码问题，若有解，到最后都将变成正序排列的八个数字，而在移动时，空缺位置（记为<strong>X</strong>）若左右移动，那么其排列顺序不变，若上下移动，由于位数相差2，那么，可以想到，其逆序数的奇偶性质不变，因此，若该状态的八数码有解，那么，其逆序数必奇偶性必定和目标状态一样，为偶数。</p>
+<p>###移动过程的路径记录</p>
+<p>在移动过程中，如何去记录路径？由于每次移动，得到的状态数字有所改变，因此，我们可以使用<a href="http://baike.baidu.com/link?url=O2QX1-lK9nkmqPnE5bkeMHh08cLBALfhziM73e4eqaYBTzxiTfauj88VLgVrPFrSMFdS1Bm4lgHYbrd8PwMhTa" target="_blank" rel="external"><strong>康拓展开</strong></a>来保存达到该状态的移动方案。公式如下：</p>
+<blockquote>
+<p><strong>$X=\sum_{i=1}^na[i]*(i-1)!$</strong></p>
+</blockquote>
+<p>在该问题中，<strong>$a[i]$</strong>为该处数的逆序。</p>
+<p>###解决问题</p>
+<p>在其中，我们用该状态下每个数所在位置到其目标位置的绝对距离为<strong>$h(n)$</strong>的值，用已走步数代表<strong>$g(n)$</strong>的值，来得到该状态下的f值。</p>
+<blockquote>
+<p><strong>$h(n)=\sum_{i=1}^n|a[i]-goal[a[i]]|$</strong><br>其中，<strong>$goal[a[i]]$</strong>为该数的目标位置</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></div><div class="line"> </div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"> </div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></div><div class="line"> </div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"> </div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 500000</span></div><div class="line"> </div><div class="line"><span class="keyword">int</span> fact[<span class="number">10</span>];</div><div class="line"> </div><div class="line"><span class="keyword">int</span>  step[<span class="number">4</span>][<span class="number">2</span>] = &#123;&#123;<span class="number">-1</span>,<span class="number">0</span>&#125;,&#123;<span class="number">1</span>,<span class="number">0</span>&#125;,&#123;<span class="number">0</span>,<span class="number">-1</span>&#125;,&#123;<span class="number">0</span>,<span class="number">1</span>&#125;&#125;;</div><div class="line"><span class="keyword">int</span>  pos[<span class="number">9</span>][<span class="number">2</span>]= &#123;&#123;<span class="number">0</span>,<span class="number">0</span>&#125;,&#123;<span class="number">0</span>,<span class="number">1</span>&#125;,&#123;<span class="number">0</span>,<span class="number">2</span>&#125;,&#123;<span class="number">1</span>,<span class="number">0</span>&#125;,&#123;<span class="number">1</span>,<span class="number">1</span>&#125;,&#123;<span class="number">1</span>,<span class="number">2</span>&#125;,&#123;<span class="number">2</span>,<span class="number">0</span>&#125;,&#123;<span class="number">2</span>,<span class="number">1</span>&#125;,&#123;<span class="number">2</span>,<span class="number">2</span>&#125;&#125;;</div><div class="line"><span class="keyword">char</span> dir[<span class="number">4</span>] = &#123;<span class="string">'u'</span>,<span class="string">'d'</span>,<span class="string">'l'</span>,<span class="string">'r'</span>&#125;;</div><div class="line"> </div><div class="line"><span class="keyword">int</span>  pre[MAXN];</div><div class="line"><span class="keyword">char</span> ans[MAXN];</div><div class="line"><span class="keyword">bool</span> vis[MAXN];</div><div class="line"> </div><div class="line"><span class="keyword">struct</span> node</div><div class="line">&#123;</div><div class="line">    <span class="keyword">char</span> <span class="built_in">map</span>[<span class="number">4</span>][<span class="number">4</span>];</div><div class="line">    <span class="keyword">int</span> x,y;</div><div class="line">    <span class="keyword">int</span> h,g,f;</div><div class="line">    <span class="keyword">friend</span> <span class="keyword">bool</span> <span class="keyword">operator</span>&lt; (<span class="keyword">const</span> node &amp;a,<span class="keyword">const</span> node &amp;b)  </div><div class="line">    &#123;  </div><div class="line">        <span class="keyword">if</span>(a.f==b.f)  </div><div class="line">            <span class="keyword">return</span> a.g&lt;b.g;  <span class="comment">//根据测试，以g为第二目标比以h为第二目标时间少了一半 </span></div><div class="line">        <span class="keyword">return</span> a.f&gt;b.f;  </div><div class="line">    &#125;  </div><div class="line">&#125;;</div><div class="line"> </div><div class="line">node S;</div><div class="line">node temp,Next;</div><div class="line"> </div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">()</span> <span class="comment">//判断是否有解 </span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> num[<span class="number">10</span>];</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">3</span>; i++)</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;<span class="number">3</span>; j++)</div><div class="line">            <span class="keyword">if</span>(S.<span class="built_in">map</span>[i][j]==<span class="string">'x'</span>) num[i*<span class="number">3</span>+j] = <span class="number">0</span>;</div><div class="line">            <span class="keyword">else</span> num[i*<span class="number">3</span>+j] = S.<span class="built_in">map</span>[i][j]-<span class="string">'0'</span>;</div><div class="line">    <span class="keyword">int</span> cnt = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">9</span>; i++)</div><div class="line">	&#123;</div><div class="line">        <span class="keyword">if</span>(num[i]==<span class="number">0</span>) <span class="keyword">continue</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>; j&lt;<span class="number">9</span>; j++)</div><div class="line">		&#123;</div><div class="line">            <span class="keyword">if</span>(num[j]==<span class="number">0</span>) <span class="keyword">continue</span>;</div><div class="line">            <span class="keyword">if</span>(num[i]&gt;num[j]) cnt++;</div><div class="line">        &#125;    </div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> !(cnt&amp;<span class="number">1</span>);</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">contor</span><span class="params">(node cnt)</span>	<span class="comment">//康拓展开 </span></span></div><div class="line">&#123; </div><div class="line">    <span class="keyword">int</span> i,j,k;  </div><div class="line">    <span class="keyword">int</span> s[<span class="number">10</span>];  </div><div class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;  </div><div class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i&lt;<span class="number">3</span>; i++) </div><div class="line">	&#123;  </div><div class="line">        <span class="keyword">for</span>(j = <span class="number">0</span>; j&lt;<span class="number">3</span>; j++) </div><div class="line">		&#123;  </div><div class="line">            s[<span class="number">3</span>*i+j] = cnt.<span class="built_in">map</span>[i][j];  </div><div class="line">            <span class="keyword">int</span> cnt = <span class="number">0</span>;  </div><div class="line">            <span class="keyword">for</span>(k = <span class="number">3</span>*i+j<span class="number">-1</span>; k&gt;=<span class="number">0</span>; k--)</div><div class="line">		    &#123;  </div><div class="line">                <span class="keyword">if</span>(s[k]&gt;s[<span class="number">3</span>*i+j])  </div><div class="line">                    cnt++;  </div><div class="line">            &#125;  </div><div class="line">            ans = ans+fact[i*<span class="number">3</span>+j]*cnt;  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">    <span class="keyword">return</span> ans;  </div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">get_H</span><span class="params">(node cnt)</span> <span class="comment">//获得 h(n)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> ans=<span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">3</span>; i++)</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;<span class="number">3</span>; j++)</div><div class="line">		&#123;</div><div class="line">            <span class="keyword">if</span>(cnt.<span class="built_in">map</span>[i][j]==<span class="string">'x'</span>) <span class="keyword">continue</span>;</div><div class="line">            <span class="keyword">int</span> goal = cnt.<span class="built_in">map</span>[i][j]-<span class="string">'1'</span>;</div><div class="line">            ans += <span class="built_in">abs</span>(pos[goal][<span class="number">0</span>]-i)+<span class="built_in">abs</span>(pos[goal][<span class="number">1</span>]-j);    </div><div class="line">        &#125;</div><div class="line">    <span class="keyword">return</span> ans;</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">bool</span> flag = <span class="literal">false</span>;</div><div class="line">    <span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span>(vis)); </div><div class="line">    priority_queue&lt;node&gt; Q;</div><div class="line">    S.h = get_H(S);</div><div class="line">    S.g = <span class="number">0</span>;</div><div class="line">    S.f = S.h;</div><div class="line">    Q.push(S);</div><div class="line">    <span class="keyword">while</span>(!Q.empty())</div><div class="line">	&#123;</div><div class="line">        temp=Q.top();</div><div class="line">        Q.pop();</div><div class="line">        <span class="keyword">int</span> <span class="keyword">k_t</span> = contor(temp);    </div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">4</span>; i++)</div><div class="line">		&#123;</div><div class="line">            Next = temp;</div><div class="line">            Next.x += step[i][<span class="number">0</span>];</div><div class="line">            Next.y += step[i][<span class="number">1</span>];</div><div class="line">            <span class="keyword">if</span>(Next.x&lt;<span class="number">0</span>||Next.x&gt;<span class="number">2</span>||Next.y&lt;<span class="number">0</span>||Next.y&gt;<span class="number">2</span>) <span class="keyword">continue</span>; <span class="comment">//判断是否越界 </span></div><div class="line">            Next.<span class="built_in">map</span>[temp.x][temp.y] = Next.<span class="built_in">map</span>[Next.x][Next.y]; </div><div class="line">            Next.<span class="built_in">map</span>[Next.x][Next.y] = <span class="string">'x'</span>;</div><div class="line">            <span class="keyword">int</span> cnt = contor(Next);</div><div class="line">            <span class="keyword">if</span>(vis[cnt]) <span class="keyword">continue</span>;</div><div class="line">            vis[cnt] = <span class="literal">true</span>; <span class="comment">//记录该状态 </span></div><div class="line">            Next.g += <span class="number">1</span>;</div><div class="line">            Next.h = get_H(Next);</div><div class="line">            Next.f = Next.h+Next.g;    </div><div class="line">            pre[cnt] = <span class="keyword">k_t</span>;</div><div class="line">            ans[cnt] = dir[i];</div><div class="line">            Q.push(Next);</div><div class="line">            <span class="keyword">if</span>(cnt==<span class="number">0</span>) <span class="comment">//当cnt==0时，达到目标，跳出循环 </span></div><div class="line">			&#123;</div><div class="line">                flag = <span class="literal">true</span>;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;  </div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(flag) <span class="keyword">break</span>;      </div><div class="line">    &#125;</div><div class="line">    <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; s; <span class="comment">//处理输出移动方法 </span></div><div class="line">    <span class="keyword">int</span> now = <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> cnt=contor(S);</div><div class="line">    <span class="keyword">while</span>(cnt!=now)</div><div class="line">	&#123;</div><div class="line">        s.push(ans[now]);    </div><div class="line">        now = pre[now];</div><div class="line">    &#125; </div><div class="line">    <span class="keyword">while</span>(!s.empty())</div><div class="line">	&#123;</div><div class="line">        <span class="built_in">putchar</span>(s.top());</div><div class="line">        s.pop();</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">int</span>  i,j,len,x,y;</div><div class="line">    <span class="keyword">char</span> str[<span class="number">100</span>];</div><div class="line">    fact[<span class="number">0</span>] = <span class="number">1</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">10</span>; i++) fact[i] = fact[i<span class="number">-1</span>] * i; <span class="comment">//预处理1~9阶乘 </span></div><div class="line">    <span class="keyword">while</span>(gets(str))</div><div class="line">	&#123;</div><div class="line">        x = y = <span class="number">0</span>;  </div><div class="line">        len = <span class="built_in">strlen</span>(str);  </div><div class="line">        <span class="keyword">for</span>(i = <span class="number">0</span>; i&lt;len; i++)</div><div class="line">		&#123;  </div><div class="line">            <span class="keyword">if</span>(str[i]&gt;=<span class="string">'0'</span> &amp;&amp; str[i]&lt;=<span class="string">'9'</span> || str[i]==<span class="string">'x'</span>)</div><div class="line">			&#123;  </div><div class="line">                S.<span class="built_in">map</span>[x][y] = str[i];  </div><div class="line">                <span class="keyword">if</span>(S.<span class="built_in">map</span>[x][y] == <span class="string">'x'</span>)</div><div class="line">				&#123;  </div><div class="line">                    S.x = x;  </div><div class="line">                    S.y = y;  </div><div class="line">                &#125;  </div><div class="line">                y++;  </div><div class="line">                <span class="keyword">if</span>(y==<span class="number">3</span>)</div><div class="line">				&#123;  </div><div class="line">                    y = <span class="number">0</span>;  </div><div class="line">                    x++;  </div><div class="line">                &#125;  </div><div class="line">            &#125;  </div><div class="line">        &#125;  </div><div class="line">        <span class="keyword">if</span>(!check()) </div><div class="line">			<span class="built_in">printf</span>(<span class="string">"unsolvable\n"</span>);</div><div class="line">        <span class="keyword">else</span></div><div class="line">			solve();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>##参考<br><a href="https://en.wikipedia.org/wiki/A*_search_algorithm" target="_blank" rel="external">A* search algorithm | WiKi</a><br><a href="http://www.cnblogs.com/kanego/archive/2011/08/30/2159070.html" target="_blank" rel="external">A*算法详解 | CSDN</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/ACM-ICPC/">ACM/ICPC</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/八数码/">八数码</a><a href="/tags/A-搜索/">A*搜索</a><a href="/tags/康拓展开/">康拓展开</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2015/07/27/八数码/" data-title="八数码 | Angel_奏心" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/07/28/奏心的由来/" title="奏心的由来">
+  <strong>上一篇：</strong><br/>
+  <span>
+  奏心的由来</span>
+</a>
+</div>
+
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ 
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github 名片</p>
+<div class="github-card" data-github="angelzouxin" data-width="220" data-height="119" data-theme="medium">
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
+</div>
+  </div>
+
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/ACM-ICPC/" title="ACM/ICPC">ACM/ICPC<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/" title="Java">Java<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/arduino/" title="arduino">arduino<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/machine-learing/" title="machine learing">machine learing<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/琐记/" title="琐记">琐记<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/arduino/" title="arduino">arduino<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/日常/" title="日常">日常<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/字符串匹配/" title="字符串匹配">字符串匹配<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java-IO/" title="Java IO">Java IO<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/笔记/" title="笔记">笔记<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/KMP/" title="KMP">KMP<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/simple-training/" title="simple training">simple training<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/八数码/" title="八数码">八数码<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/A-搜索/" title="A*搜索">A*搜索<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/康拓展开/" title="康拓展开">康拓展开<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/python/" title="python">python<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://idlepilot.com/" target="_blank" title="飞行员手册">飞行员手册</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://chouun.github.io/" target="_blank" title="Fate/Unlimted Darkness">Fate/Unlimted Darkness</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=null&verifier=&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Angel_zouxin <br/>
+			——立于浮华之世，奏天籁之音</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/angelzouxin" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		<a href="http://www.zhihu.com/people/angelzoxuin" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		<a href="https://plus.google.com/114866791066999909157?rel=author" target="_blank" class="icon-google_plus" title="Google+"></a>
+		
+		
+		<a href="mailto:angelzouxin@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="Angel_奏心">Angel_奏心</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

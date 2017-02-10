@@ -1,0 +1,565 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>arduino开发日志Day4 | Angel_奏心</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Angel_奏心">
+    
+
+    
+    <meta name="description" content="#优化蜂鸣器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="arduino开发日志Day4">
+<meta property="og:url" content="http://yoursite.com/2015/08/16/arduino开发日志Day4/index.html">
+<meta property="og:site_name" content="Angel_奏心">
+<meta property="og:description" content="#优化蜂鸣器">
+<meta property="og:updated_time" content="2016-11-24T23:51:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="arduino开发日志Day4">
+<meta name="twitter:description" content="#优化蜂鸣器">
+<link rel="publisher" href="114866791066999909157">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Angel_奏心" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Angel_奏心" title="Angel_奏心"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Angel_奏心">Angel_奏心</a></h1>
+				<h2 class="blog-motto">立于浮华之世，奏天籁之音</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/08/16/arduino开发日志Day4/" title="arduino开发日志Day4" itemprop="url">arduino开发日志Day4</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/114866791066999909157?rel=author" title="Angel_奏心" target="_blank" itemprop="author">Angel_奏心</a>
+		
+  <p class="article-time">
+    <time datetime="2015-08-16T02:53:27.000Z" itemprop="datePublished"> 发表于 2015-08-16</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			
+		
+		</div>
+		
+		<p>#优化蜂鸣器<br><a id="more"></a></p>
+<p>##用蜂鸣器演奏音乐<br>在整合近距离追踪装置时，因为蜂鸣器声音过于刺耳，所以想将其改为演奏音乐，由于无源蜂鸣器是通过电流的频率来发出不同声音，所以可以利用这点，用蜂鸣器演奏出音乐，该处将其改为卡农。用蜂鸣器演奏卡农的程序如下。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTD0 -1</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTD1 294</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTD2 330</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTD3 350</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTD4 393</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTD5 441</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTD6 495</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTD7 556</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTDL1 147</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTDL2 165</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTDL3 175</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTDL4 196</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTDL5 221</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTDL6 248</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTDL7 278</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTDH1 589</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTDH2 661</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTDH3 700</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTDH4 786</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTDH5 882</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTDH6 990</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTDH7 112</span></div><div class="line"><span class="comment">//列出全部D调的频率</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> WHOLE 1</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> HALF 0.5</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> QUARTER 0.25</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> EIGHTH 0.25</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> SIXTEENTH 0.625</span></div><div class="line"><span class="comment">//列出所有节拍</span></div><div class="line"><span class="keyword">int</span> tune[]=                 <span class="comment">//根据简谱列出各频率</span></div><div class="line">&#123;</div><div class="line">  NTD3,NTD3,NTD4,NTD5,</div><div class="line">  NTD5,NTD4,NTD3,NTD2,</div><div class="line">  NTD1,NTD1,NTD2,NTD3,</div><div class="line">  NTD3,NTD2,NTD2,</div><div class="line">  NTD3,NTD3,NTD4,NTD5,</div><div class="line">  NTD5,NTD4,NTD3,NTD2,</div><div class="line">  NTD1,NTD1,NTD2,NTD3,</div><div class="line">  NTD2,NTD1,NTD1,</div><div class="line">  NTD2,NTD2,NTD3,NTD1,</div><div class="line">  NTD2,NTD3,NTD4,NTD3,NTD1,</div><div class="line">  NTD2,NTD3,NTD4,NTD3,NTD2,</div><div class="line">  NTD1,NTD2,NTDL5,NTD0,</div><div class="line">  NTD3,NTD3,NTD4,NTD5,</div><div class="line">  NTD5,NTD4,NTD3,NTD4,NTD2,</div><div class="line">  NTD1,NTD1,NTD2,NTD3,</div><div class="line">  NTD2,NTD1,NTD1</div><div class="line">&#125;;</div><div class="line"><span class="keyword">float</span> durt[]=                   <span class="comment">//根据简谱列出各节拍</span></div><div class="line">&#123;</div><div class="line">  <span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,</div><div class="line">  <span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,</div><div class="line">  <span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,</div><div class="line">  <span class="number">1</span>+<span class="number">0.5</span>,<span class="number">0.5</span>,<span class="number">1</span>+<span class="number">1</span>,</div><div class="line">  <span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,</div><div class="line">  <span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,</div><div class="line">  <span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,</div><div class="line">  <span class="number">1</span>+<span class="number">0.5</span>,<span class="number">0.5</span>,<span class="number">1</span>+<span class="number">1</span>,</div><div class="line">  <span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,</div><div class="line">  <span class="number">1</span>,<span class="number">0.5</span>,<span class="number">0.5</span>,<span class="number">1</span>,<span class="number">1</span>,</div><div class="line">  <span class="number">1</span>,<span class="number">0.5</span>,<span class="number">0.5</span>,<span class="number">1</span>,<span class="number">1</span>,</div><div class="line">  <span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,</div><div class="line">  <span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,</div><div class="line">  <span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0.5</span>,<span class="number">0.5</span>,</div><div class="line">  <span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,</div><div class="line">  <span class="number">1</span>+<span class="number">0.5</span>,<span class="number">0.5</span>,<span class="number">1</span>+<span class="number">1</span>,</div><div class="line">&#125;;</div><div class="line"><span class="keyword">int</span> length;</div><div class="line"><span class="keyword">int</span> tonepin=<span class="number">6</span>;   <span class="comment">//得用6号接口</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">  pinMode(tonepin,OUTPUT);</div><div class="line">  length=<span class="keyword">sizeof</span>(tune)/<span class="keyword">sizeof</span>(tune[<span class="number">0</span>]);   <span class="comment">//计算长度</span></div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">loop</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> x=<span class="number">0</span>;x&lt;length;x++)</div><div class="line">  &#123;</div><div class="line">    tone(tonepin,tune[x]);</div><div class="line">    delay(<span class="number">500</span>*durt[x]);   <span class="comment">//这里用来根据节拍调节延时，500这个指数可以自己调整，在该音乐中，我发现用500比较合适。</span></div><div class="line">    noTone(tonepin);</div><div class="line">  &#125;</div><div class="line">  delay(<span class="number">2000</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>##整合代码<br>将音乐演奏整合至模块时，碰到了有关问题，<strong>如何使蜂鸣器在用蓝牙控制时，播出完整的歌。</strong><br>解决方法：通过一个bool类型变量记录其是否为开启状态，再用i记录当前音符，每循环一次，音符位置向后移动一位（i++）。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div></pre></td><td class="code"><pre><div class="line">String comdata = <span class="string">""</span>;</div><div class="line"><span class="keyword">int</span> Flag = <span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="comment">//gps set</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;SoftwareSerial.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"TinyGPS.h"</span></span></div><div class="line">TinyGPS gps;</div><div class="line"><span class="function">SoftwareSerial <span class="title">Gsmserial</span><span class="params">(<span class="number">10</span>,<span class="number">11</span>)</span></span>;</div><div class="line">String TEMPdata=<span class="string">""</span>;</div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> apikey <span class="meta-string">"oQ********************************fjgKEA"</span></span></div><div class="line"><span class="keyword">unsigned</span> <span class="keyword">long</span> deviceid=**<span class="number">411</span>;</div><div class="line">String sensorid=<span class="string">"TEMP"</span>;</div><div class="line">String sensor1id=<span class="string">"PM25"</span>;</div><div class="line"><span class="comment">////////////////////////////////////////////////////////////////////////////////////////</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> Apikey <span class="meta-string">"tX***************************q2iNA4A"</span></span></div><div class="line"><span class="keyword">unsigned</span> <span class="keyword">long</span> device1id=***<span class="number">05</span>;</div><div class="line">String sensor11id=<span class="string">"GPSdata"</span>;</div><div class="line">        <span class="keyword">bool</span> newData = <span class="literal">false</span>; </div><div class="line">        <span class="keyword">char</span> gps_year[<span class="number">8</span>];  </div><div class="line">        <span class="keyword">char</span> gps_mon[<span class="number">3</span>];  </div><div class="line">        <span class="keyword">char</span> gps_day[<span class="number">3</span>];  </div><div class="line">        <span class="keyword">char</span> gps_hour[<span class="number">3</span>];  </div><div class="line">        <span class="keyword">char</span> gps_min[<span class="number">3</span>];  </div><div class="line">        <span class="keyword">char</span> gps_sec[<span class="number">3</span>];        </div><div class="line">        <span class="keyword">char</span> gps_lon[<span class="number">20</span>]=&#123;<span class="string">"\0"</span>&#125;;  </div><div class="line">        <span class="keyword">char</span> gps_lat[<span class="number">20</span>]=&#123;<span class="string">"\0"</span>&#125;; </div><div class="line">        <span class="keyword">char</span> gps_heigh[<span class="number">20</span>]=&#123;<span class="string">"\0"</span>&#125;;</div><div class="line">        <span class="keyword">char</span> gps_sms[<span class="number">100</span>];</div><div class="line"><span class="comment">//////////////////////////////////////////////////////////////////////////////</span></div><div class="line"><span class="keyword">char</span> Time_sms[<span class="number">20</span>]=&#123;<span class="string">"\0"</span>&#125;;</div><div class="line"><span class="keyword">char</span> Date_sms[<span class="number">20</span>]=&#123;<span class="string">"\0"</span>&#125;;</div><div class="line"><span class="keyword">char</span> Lat_sms[<span class="number">20</span>]=&#123;<span class="string">"\0"</span>&#125;;</div><div class="line"><span class="keyword">char</span> Lon_sms[<span class="number">20</span>]=&#123;<span class="string">"\0"</span>&#125;;</div><div class="line"></div><div class="line"><span class="comment">//buzzer set</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTD0 -1</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTD1 294</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTD2 330</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTD3 350</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTD4 393</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTD5 441</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTD6 495</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTD7 556</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTDL1 147</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTDL2 165</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTDL3 175</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTDL4 196</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTDL5 221</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTDL6 248</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTDL7 278</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTDH1 589</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTDH2 661</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTDH3 700</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTDH4 786</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTDH5 882</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTDH6 990</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NTDH7 112</span></div><div class="line"><span class="comment">//列出全部D调的频率</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> WHOLE 1</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> HALF 0.5</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> QUARTER 0.25</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> EIGHTH 0.25</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> SIXTEENTH 0.625</span></div><div class="line"><span class="comment">//列出所有节拍</span></div><div class="line"><span class="keyword">int</span> tune[]=                 <span class="comment">//根据简谱列出各频率</span></div><div class="line">&#123;</div><div class="line">  NTD3,NTD3,NTD4,NTD5,</div><div class="line">  NTD5,NTD4,NTD3,NTD2,</div><div class="line">  NTD1,NTD1,NTD2,NTD3,</div><div class="line">  NTD3,NTD2,NTD2,</div><div class="line">  NTD3,NTD3,NTD4,NTD5,</div><div class="line">  NTD5,NTD4,NTD3,NTD2,</div><div class="line">  NTD1,NTD1,NTD2,NTD3,</div><div class="line">  NTD2,NTD1,NTD1,</div><div class="line">  NTD2,NTD2,NTD3,NTD1,</div><div class="line">  NTD2,NTD3,NTD4,NTD3,NTD1,</div><div class="line">  NTD2,NTD3,NTD4,NTD3,NTD2,</div><div class="line">  NTD1,NTD2,NTDL5,NTD0,</div><div class="line">  NTD3,NTD3,NTD4,NTD5,</div><div class="line">  NTD5,NTD4,NTD3,NTD4,NTD2,</div><div class="line">  NTD1,NTD1,NTD2,NTD3,</div><div class="line">  NTD2,NTD1,NTD1</div><div class="line">&#125;;</div><div class="line"><span class="keyword">float</span> durt[]=                   <span class="comment">//根据简谱列出各节拍</span></div><div class="line">&#123;</div><div class="line">  <span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,</div><div class="line">  <span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,</div><div class="line">  <span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,</div><div class="line">  <span class="number">1</span>+<span class="number">0.5</span>,<span class="number">0.5</span>,<span class="number">1</span>+<span class="number">1</span>,</div><div class="line">  <span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,</div><div class="line">  <span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,</div><div class="line">  <span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,</div><div class="line">  <span class="number">1</span>+<span class="number">0.5</span>,<span class="number">0.5</span>,<span class="number">1</span>+<span class="number">1</span>,</div><div class="line">  <span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,</div><div class="line">  <span class="number">1</span>,<span class="number">0.5</span>,<span class="number">0.5</span>,<span class="number">1</span>,<span class="number">1</span>,</div><div class="line">  <span class="number">1</span>,<span class="number">0.5</span>,<span class="number">0.5</span>,<span class="number">1</span>,<span class="number">1</span>,</div><div class="line">  <span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,</div><div class="line">  <span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,</div><div class="line">  <span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0.5</span>,<span class="number">0.5</span>,</div><div class="line">  <span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,</div><div class="line">  <span class="number">1</span>+<span class="number">0.5</span>,<span class="number">0.5</span>,<span class="number">1</span>+<span class="number">1</span>,</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">int</span> length;</div><div class="line"><span class="keyword">int</span> tonepin=<span class="number">6</span>;   <span class="comment">//调用6号接口</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// initialize the library with the numbers of the interface pins</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// The TinyGPS++ object</span></div><div class="line">TinyGPSPlus gps;</div><div class="line"></div><div class="line"><span class="comment">// The serial connection to the GPS device</span></div><div class="line"><span class="function">SoftwareSerial <span class="title">ss</span><span class="params">(<span class="number">3</span>, <span class="number">2</span>)</span></span>;</div><div class="line"></div><div class="line"><span class="comment">// Keep track of which screen we are on</span></div><div class="line"><span class="keyword">int</span> currentScreen = <span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="comment">// Signal Icon</span></div><div class="line">byte signalIcon[<span class="number">8</span>] = &#123;</div><div class="line">  <span class="number">0b00000</span>,</div><div class="line">  <span class="number">0b11111</span>,</div><div class="line">  <span class="number">0b00000</span>,</div><div class="line">  <span class="number">0b01110</span>,</div><div class="line">  <span class="number">0b00000</span>,</div><div class="line">  <span class="number">0b00100</span>,</div><div class="line">  <span class="number">0b00100</span>,</div><div class="line">  <span class="number">0b00000</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// Direction Icon</span></div><div class="line">byte courseIcon[<span class="number">8</span>] = &#123;</div><div class="line">  <span class="number">0b00000</span>,</div><div class="line">  <span class="number">0b00000</span>,</div><div class="line">  <span class="number">0b00100</span>,</div><div class="line">  <span class="number">0b01110</span>,</div><div class="line">  <span class="number">0b01110</span>,</div><div class="line">  <span class="number">0b11011</span>,</div><div class="line">  <span class="number">0b10001</span>,</div><div class="line">  <span class="number">0b00000</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// Setup Check</span></div><div class="line"><span class="keyword">bool</span> initiating = <span class="literal">true</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span> </span>&#123;</div><div class="line">  ss.begin(<span class="number">9600</span>);</div><div class="line">  Serial.begin(<span class="number">9600</span>);</div><div class="line">  delay(<span class="number">100</span>);</div><div class="line">  pinMode(tonepin,OUTPUT);</div><div class="line">  length=<span class="keyword">sizeof</span>(tune)/<span class="keyword">sizeof</span>(tune[<span class="number">0</span>]);  <span class="comment">//计算长度</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">loop</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="comment">// Feed the GPS data from Serial into the TinyGPS library</span></div><div class="line">  <span class="keyword">while</span>(Serial.available() &gt; <span class="number">0</span>)</div><div class="line">  &#123;</div><div class="line">    comdata += <span class="keyword">char</span>(Serial.read());</div><div class="line">    delay(<span class="number">2</span>);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">if</span>(comdata.length() &gt; <span class="number">0</span>)   <span class="comment">//当接收到字符后，判断命令</span></div><div class="line">   &#123;</div><div class="line">    comdata += <span class="string">"\0"</span>;</div><div class="line">    <span class="keyword">if</span>(comdata == <span class="string">"on"</span>) <span class="comment">//当命令为“on”时</span></div><div class="line">    &#123;</div><div class="line">       <span class="keyword">if</span>(Flag == <span class="number">0</span>) <span class="comment">//原为关闭则打开</span></div><div class="line">      &#123;</div><div class="line">         digitalWrite(tonepin,HIGH);</div><div class="line">         Serial.println(<span class="string">"Follow The Music and find the goods."</span>);</div><div class="line">         <span class="keyword">for</span>(<span class="keyword">int</span> x=<span class="number">0</span>;x&lt;length;x++)</div><div class="line">          &#123;</div><div class="line">            tone(tonepin,tune[x]);</div><div class="line">            delay(<span class="number">500</span>*durt[x]);   <span class="comment">//这里用来根据节拍调节延时，500这个指数可以自己调整，在该音乐中，我发现用500比较合适。</span></div><div class="line">            noTone(tonepin);</div><div class="line">          &#125;</div><div class="line">         delay(<span class="number">2000</span>);</div><div class="line">       </div><div class="line">         Flag = <span class="number">1</span>;</div><div class="line">      &#125;     </div><div class="line">      delay(<span class="number">2</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(comdata == <span class="string">"off"</span>) <span class="comment">//命令为“off”时</span></div><div class="line">    &#123;</div><div class="line">      <span class="keyword">if</span>(Flag == <span class="number">1</span>) <span class="comment">//原为打开则关闭</span></div><div class="line">      &#123;</div><div class="line">        digitalWrite(redled,LOW);</div><div class="line">        Serial.println(<span class="string">"The Buzzer has closed."</span>);</div><div class="line">         Flag = <span class="number">0</span>;</div><div class="line">      &#125;  </div><div class="line">      <span class="keyword">else</span> <span class="keyword">if</span>(comdata == <span class="string">"Find"</span>)</div><div class="line">      &#123;</div><div class="line">        Check_gps();</div><div class="line">        Serial.println(gps_heigh);</div><div class="line">        Serial.println(gps_lon);</div><div class="line">        Serial.println(gps_lat);</div><div class="line">        Serial.println(Data_sms);</div><div class="line">        Serial.println(Time_gps);</div><div class="line">        TEMPdata=<span class="string">""</span>;</div><div class="line">      &#125;</div><div class="line">      delay(<span class="number">2</span>);</div><div class="line">    &#125;</div><div class="line">    comdata = <span class="string">""</span>;</div><div class="line">   &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">Check_gps</span><span class="params">()</span>  </span></div><div class="line">&#123;   </div><div class="line">  newData=<span class="literal">false</span>;    </div><div class="line">  <span class="keyword">unsigned</span> <span class="keyword">long</span> chars;    </div><div class="line">  <span class="keyword">unsigned</span> <span class="keyword">short</span> sentences, failed;       </div><div class="line">   </div><div class="line">  <span class="comment">// For one second we parse GPS data and report some key values    </span></div><div class="line">  <span class="keyword">for</span> (<span class="keyword">unsigned</span> <span class="keyword">long</span> start = millis(); millis() - start &lt; <span class="number">1000</span>;)    </div><div class="line">  &#123;      </div><div class="line">    <span class="keyword">while</span> (Serial.available())      </div><div class="line">    &#123;        </div><div class="line">    <span class="keyword">char</span> c = Serial.read();       </div><div class="line">    <span class="comment">// Serial.write(c);</span></div><div class="line">            <span class="comment">// uncomment this line if you want to see the GPS data flowing       </span></div><div class="line">    <span class="keyword">if</span> (gps.encode(c)) <span class="comment">// Did a new valid sentence come in?          </span></div><div class="line">    newData = <span class="literal">true</span>;      </div><div class="line">    &#125;    </div><div class="line">  &#125;       </div><div class="line">  <span class="keyword">if</span> (newData)    </div><div class="line">  &#123;  </div><div class="line">  <span class="keyword">float</span> flat, flon,alti;      </div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> age;      </div><div class="line">    <span class="keyword">int</span> _year;     </div><div class="line">    byte _month, _day,_hour,_minute,_second,_hundredths;  </div><div class="line">    gps.f_altitude();    </div><div class="line">    gps.f_get_position(&amp;flat, &amp;flon, &amp;age);          </div><div class="line">    gps.crack_datetime(&amp;_year,&amp;_month,&amp;_day,&amp;_hour,&amp;_minute,&amp;_second,&amp;_hundredths,&amp;age);     </div><div class="line">    flat == TinyGPS::GPS_INVALID_F_ANGLE ? <span class="number">0.0</span> : flat, <span class="number">6</span>;          </div><div class="line">    flon == TinyGPS::GPS_INVALID_F_ANGLE ? <span class="number">0.0</span> : flon, <span class="number">6</span>; </div><div class="line">    alti=gps.f_altitude(); </div><div class="line">    Serial.print(alti);</div><div class="line">    dtostrf(alti, <span class="number">0</span>, <span class="number">3</span>, gps_heigh);   </div><div class="line">    dtostrf(flat, <span class="number">0</span>, <span class="number">6</span>, gps_lat);       </div><div class="line">    dtostrf(flon, <span class="number">0</span>, <span class="number">6</span>, gps_lon);                      </div><div class="line">    <span class="built_in">strcpy</span>(Lat_sms,<span class="string">"lat:"</span>);</div><div class="line">    <span class="built_in">strcat</span>(Lat_sms,gps_lat);        </div><div class="line">    <span class="built_in">strcpy</span>(Lon_sms,<span class="string">"lon: "</span>);</div><div class="line">    <span class="built_in">strcat</span>(Lon_sms,gps_lon);         </div><div class="line">    <span class="built_in">strcpy</span>(Date_sms,<span class="string">"Date:"</span>);</div><div class="line">    itoa(_year,gps_year,<span class="number">10</span>);</div><div class="line">    <span class="built_in">strcat</span>(Date_sms,gps_year); </div><div class="line">    <span class="built_in">strcat</span>(Date_sms,<span class="string">"/"</span>);     </div><div class="line">    itoa(_month,gps_mon,<span class="number">10</span>); </div><div class="line">    <span class="keyword">if</span>(<span class="built_in">strlen</span>(gps_mon)==<span class="number">1</span>)  <span class="built_in">strcat</span>(Date_sms,<span class="string">"0"</span>);     </div><div class="line">    <span class="built_in">strcat</span>(Date_sms,gps_mon);</div><div class="line">    <span class="built_in">strcat</span>(Date_sms,<span class="string">"/"</span>);                   </div><div class="line">    itoa(_day,gps_day,<span class="number">10</span>);   </div><div class="line">    <span class="keyword">if</span>(<span class="built_in">strlen</span>(gps_day)==<span class="number">1</span>)  <span class="built_in">strcat</span>(Date_sms,<span class="string">"0"</span>);     </div><div class="line">    <span class="built_in">strcat</span>(Date_sms,gps_day); </div><div class="line">    _hour=_hour+<span class="number">8</span>;</div><div class="line">    <span class="built_in">strcpy</span>(Time_sms,<span class="string">"Time:"</span>);</div><div class="line">    itoa(_hour,gps_hour,<span class="number">10</span>); </div><div class="line">    <span class="keyword">if</span>(<span class="built_in">strlen</span>(gps_hour)==<span class="number">1</span>) <span class="built_in">strcat</span>(Time_sms,<span class="string">"0"</span>);</div><div class="line">    <span class="built_in">strcat</span>(Time_sms,gps_hour);</div><div class="line">    <span class="built_in">strcat</span>(Time_sms,<span class="string">":"</span>);                 </div><div class="line">    itoa(_minute,gps_min,<span class="number">10</span>);</div><div class="line">    <span class="keyword">if</span>(<span class="built_in">strlen</span>(gps_min)==<span class="number">1</span>)  <span class="built_in">strcat</span>(Time_sms,<span class="string">"0"</span>); </div><div class="line">    <span class="built_in">strcat</span>(Time_sms,gps_min);</div><div class="line">    <span class="built_in">strcat</span>(Time_sms,<span class="string">":"</span>);                 </div><div class="line">    itoa(_second,gps_sec,<span class="number">10</span>);</div><div class="line">    <span class="keyword">if</span>(<span class="built_in">strlen</span>(gps_sec)==<span class="number">1</span>)  <span class="built_in">strcat</span>(gps_sms,<span class="string">"0"</span>); </div><div class="line">    <span class="built_in">strcat</span>(Time_sms,gps_sec);                         </div><div class="line">  &#125;             </div><div class="line">&#125;</div></pre></td></tr></table></figure>  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/arduino/">arduino</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/arduino/">arduino</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2015/08/16/arduino开发日志Day4/" data-title="arduino开发日志Day4 | Angel_奏心" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/02/19/codeforce652B/" title="codeforce652B">
+  <strong>上一篇：</strong><br/>
+  <span>
+  codeforce652B</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/08/15/arduino开发日志Day3/"  title="arduino开发日志Day3">
+ <strong>下一篇：</strong><br/> 
+ <span>arduino开发日志Day3
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ 
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github 名片</p>
+<div class="github-card" data-github="angelzouxin" data-width="220" data-height="119" data-theme="medium">
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
+</div>
+  </div>
+
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/ACM-ICPC/" title="ACM/ICPC">ACM/ICPC<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/" title="Java">Java<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/arduino/" title="arduino">arduino<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/machine-learing/" title="machine learing">machine learing<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/琐记/" title="琐记">琐记<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/arduino/" title="arduino">arduino<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/日常/" title="日常">日常<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/字符串匹配/" title="字符串匹配">字符串匹配<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java-IO/" title="Java IO">Java IO<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/笔记/" title="笔记">笔记<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/KMP/" title="KMP">KMP<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/simple-training/" title="simple training">simple training<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/八数码/" title="八数码">八数码<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/A-搜索/" title="A*搜索">A*搜索<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/康拓展开/" title="康拓展开">康拓展开<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/python/" title="python">python<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://idlepilot.com/" target="_blank" title="飞行员手册">飞行员手册</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://chouun.github.io/" target="_blank" title="Fate/Unlimted Darkness">Fate/Unlimted Darkness</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=null&verifier=&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Angel_zouxin <br/>
+			——立于浮华之世，奏天籁之音</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/angelzouxin" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		<a href="http://www.zhihu.com/people/angelzoxuin" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		<a href="https://plus.google.com/114866791066999909157?rel=author" target="_blank" class="icon-google_plus" title="Google+"></a>
+		
+		
+		<a href="mailto:angelzouxin@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="Angel_奏心">Angel_奏心</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
