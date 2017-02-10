@@ -4,23 +4,25 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>codeforce652B | Angel_奏心</title>
+    <title>关于java输出的一道题 | Angel_奏心</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Angel_奏心">
     
 
     
-    <meta name="description" content="寒假颓废了好久，准备回归正轨，奈何算法早已生疏，于是随便拿到水题来练练手orz。">
+    <meta name="description" content="今天在我的后宫群看到了一道有意思的java题，分享一下">
 <meta property="og:type" content="article">
-<meta property="og:title" content="codeforce652B">
-<meta property="og:url" content="http://yoursite.com/2016/02/19/codeforce652B/index.html">
+<meta property="og:title" content="关于java输出的一道题">
+<meta property="og:url" content="http://yoursite.com/2017/02/11/Java输出/index.html">
 <meta property="og:site_name" content="Angel_奏心">
-<meta property="og:description" content="寒假颓废了好久，准备回归正轨，奈何算法早已生疏，于是随便拿到水题来练练手orz。">
-<meta property="og:updated_time" content="2016-11-24T23:51:37.000Z">
+<meta property="og:description" content="今天在我的后宫群看到了一道有意思的java题，分享一下">
+<meta property="og:image" content="http://yoursite.com/img/Java-System-out/interview.jpg">
+<meta property="og:updated_time" content="2017-02-10T17:56:56.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="codeforce652B">
-<meta name="twitter:description" content="寒假颓废了好久，准备回归正轨，奈何算法早已生疏，于是随便拿到水题来练练手orz。">
+<meta name="twitter:title" content="关于java输出的一道题">
+<meta name="twitter:description" content="今天在我的后宫群看到了一道有意思的java题，分享一下">
+<meta name="twitter:image" content="http://yoursite.com/img/Java-System-out/interview.jpg">
 <link rel="publisher" href="114866791066999909157">
 
     
@@ -81,14 +83,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/02/19/codeforce652B/" title="codeforce652B" itemprop="url">codeforce652B</a>
+      <a href="/2017/02/11/Java输出/" title="关于java输出的一道题" itemprop="url">关于java输出的一道题</a>
   </h1>
   <p class="article-author">By
        
 		<a href="https://plus.google.com/114866791066999909157?rel=author" title="Angel_奏心" target="_blank" itemprop="author">Angel_奏心</a>
 		
   <p class="article-time">
-    <time datetime="2016-02-18T18:11:10.000Z" itemprop="datePublished"> 发表于 2016-02-19</time>
+    <time datetime="2017-02-10T16:16:58.000Z" itemprop="datePublished"> 发表于 2017-02-11</time>
     
   </p>
 </header>
@@ -101,17 +103,17 @@
 		
 		</div>
 		
-		<p>寒假颓废了好久，准备回归正轨，奈何算法早已生疏，于是随便拿到水题来练练手orz。</p>
+		<p>今天在我的后宫群看到了一道有意思的java题，分享一下</p>
 <a id="more"></a>
-<p>题目<a href="http://codeforces.com/problemset/problem/625/B" target="_blank" rel="external">戳这里</a></p>
-<p>##题意</p>
-<p>题目大意是让你求B串在A串中的出现次数，毫不犹豫的想到了<strong>KMP</strong></p>
-<p>##思路</p>
-<p>众所周知，KMP是解决字符串匹配的一个优秀算法，如果还未了解，可以参考这篇博客<strong><a href="http://blog.csdn.net/v_july_v/article/details/7041827" target="_blank" rel="external">从头到尾彻底理解KMP</a></strong>。</p>
-<p>在该算法中，返回的是第一次匹配到的B串在A串中的首地址。如果要求一共出现了几次，很容易想到，将匹配时的比较稍作更改，增加一个变量记录次数即可。</p>
-<p>##解题</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> Next[<span class="number">35</span>];</div><div class="line"><span class="keyword">char</span> s[<span class="number">100000</span>], p[<span class="number">35</span>];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">GetNext</span><span class="params">()</span>  </span></div><div class="line">&#123;  </div><div class="line">    <span class="keyword">int</span> pLen = <span class="built_in">strlen</span>(p);  </div><div class="line">    Next[<span class="number">0</span>] = <span class="number">-1</span>;  </div><div class="line">    <span class="keyword">int</span> k = <span class="number">-1</span>;  </div><div class="line">    <span class="keyword">int</span> j = <span class="number">0</span>;  </div><div class="line">    <span class="keyword">while</span> (j &lt; pLen - <span class="number">1</span>)  </div><div class="line">    &#123;  </div><div class="line">        <span class="keyword">if</span> (k == <span class="number">-1</span> || p[j] == p[k]) ++k, ++j, Next[j] = k;  </div><div class="line">        <span class="keyword">else</span> k = Next[k];      </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">KmpSearch</span><span class="params">()</span> </span>&#123;  </div><div class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;  </div><div class="line">    <span class="keyword">int</span> j = <span class="number">0</span>;  </div><div class="line">    <span class="keyword">int</span> sLen = <span class="built_in">strlen</span>(s);  </div><div class="line">    <span class="keyword">int</span> pLen = <span class="built_in">strlen</span>(p);</div><div class="line">	<span class="keyword">int</span> cnt = <span class="number">0</span>;  </div><div class="line">    <span class="keyword">while</span> (i &lt; sLen)  </div><div class="line">    &#123;  </div><div class="line">        <span class="keyword">if</span> (j == <span class="number">-1</span> || s[i] == p[j]) i++, j++;      </div><div class="line">        <span class="keyword">else</span> j = Next[j];    </div><div class="line">        <span class="keyword">if</span>(j == pLen) ++cnt,j=<span class="number">0</span>;</div><div class="line">    &#125;  </div><div class="line"> 	<span class="keyword">return</span> cnt;</div><div class="line">&#125;  </div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="built_in">scanf</span>(<span class="string">"%s%s"</span>, s, p);</div><div class="line">	GetNext();</div><div class="line">  	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,KmpSearch());</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>##小结<br>该题为kmp的一个变种，但是通过该题，不难想到更多的变种，例如求A串所有子串在B中的次数，只需利用A串的next数组进行dp即可<a href="http://acm.hdu.edu.cn/showproblem.php?pid=3336" target="_blank" rel="external">HDOJ3336 Count the string </a>,求串的最短周期串等等，在此就不一一例举了。</p>
+<p>题目是这样的<img src="/img/Java-System-out/interview.jpg" alt=""><br>看到第一眼，反应：<em>重载输出println也能重载</em>？<br>据说正常反应应该是 <del>在method中输出然后直接退出，果然是自己智商不够</del><br>既然不确定，那就Stack Overflow一下，找了找果然发现了，<code>System.setOut()</code></p>
+<p>关于这个函数，详细内容可以看<a href="https://docs.oracle.com/javase/7/docs/api/java/lang/System.html" target="_blank" rel="external">官方文档</a>,在这大致概括一下</p>
+<blockquote>
+<p>setOut(PrintStream out)<br>将输出流的规则设置为out内的输出规则</p>
+</blockquote>
+<p>而<code>PrintStream</code>中，则有着<code>println</code>方法，因此，我们只需要<em>override</em>一下<br><code>println(String x)</code>就可以达到要求了。</p>
+<p>记得a=10输出是无换行的，应该使用<code>super.print</code>方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//set method</span></div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</div><div class="line">    System.setOut(<span class="keyword">new</span> PrintStream(System.out) &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">println</span><span class="params">(String x)</span> </span>&#123;</div><div class="line">            <span class="keyword">if</span> (x != <span class="keyword">null</span>) &#123;</div><div class="line">                <span class="keyword">if</span> (x.equals(<span class="string">"a=10"</span>)) &#123;</div><div class="line">                    x = <span class="string">"a=100,"</span>;</div><div class="line">                    <span class="keyword">super</span>.print(x);</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    <span class="keyword">if</span> (x.equals(<span class="string">"b=10"</span>)) &#123;</div><div class="line">                        x = <span class="string">"b=200"</span>;</div><div class="line">                    &#125;</div><div class="line">                    <span class="keyword">super</span>.println(x);</div><div class="line"></div><div class="line">                &#125;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                <span class="keyword">super</span>.println(x);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出<br><code>a=100,b=200</code></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -119,13 +121,13 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/ACM-ICPC/">ACM/ICPC</a>
+  <a class="article-category-link" href="/categories/Java/">Java</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/KMP/">KMP</a><a href="/tags/字符串匹配/">字符串匹配</a>
+  <span></span> <a href="/tags/Java-IO/">Java IO</a>
   </div>
 
 </div>
@@ -134,7 +136,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2016/02/19/codeforce652B/" data-title="codeforce652B | Angel_奏心" data-tsina="null" class="share clearfix">
+	  <div data-url="http://yoursite.com/2017/02/11/Java输出/" data-title="关于java输出的一道题 | Angel_奏心" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -147,19 +149,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/08/12/machine-learing-学习笔记/" title="machine learing 学习笔记">
-  <strong>上一篇：</strong><br/>
-  <span>
-  machine learing 学习笔记</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/08/16/arduino开发日志Day4/"  title="arduino开发日志Day4">
+<a href="/2016/10/21/python训练/"  title="python训练">
  <strong>下一篇：</strong><br/> 
- <span>arduino开发日志Day4
+ <span>python训练
 </span>
 </a>
 </div>
